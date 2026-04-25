@@ -1,55 +1,59 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
 const Footer = () => {
   return (
-    <footer className="border-t border-gray-200 pt-16 pb-8 px-10">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+    <footer className="w-full bg-white border-t border-[#D9D9D9] pt-20 pb-10 px-4 md:px-16">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
         
         {/* Brand Info */}
-        <div>
-          <h2 className="text-2xl font-bold mb-8">Funiro.</h2>
-          <p className="text-[#9F9F9F] leading-relaxed">
-            400 University Drive Suite 200 Coral Gables, <br /> FL 33134 USA
+        <div className="space-y-8">
+          <h2 className="text-2xl font-bold text-black">Furniro.</h2>
+          <p className="text-[#9F9F9F] leading-6">
+            400 University Drive Suite 200 Coral <br /> Gables, <br /> FL 33134 USA
           </p>
         </div>
 
-        {/* Links */}
-        <div>
-          <h4 className="text-[#9F9F9F] font-medium mb-8">Links</h4>
-          <ul className="space-y-6 font-semibold">
-            <li><a href="#" className="hover:text-primary">Home</a></li>
-            <li><a href="#" className="hover:text-primary">Shop</a></li>
-            <li><a href="#" className="hover:text-primary">About</a></li>
-            <li><a href="#" className="hover:text-primary">Contact</a></li>
+        {/* Links Section */}
+        <div className="space-y-8">
+          <h4 className="text-[#9F9F9F] font-medium">Links</h4>
+          <ul className="space-y-8 font-medium">
+            <li><Link to="/" className="hover:text-[#B88E2F] transition-all">Home</Link></li>
+            <li><Link to="/shop" className="hover:text-[#B88E2F] transition-all">Shop</Link></li>
+            <li><Link to="/about" className="hover:text-[#B88E2F] transition-all">About</Link></li>
+            <li><Link to="/contact" className="hover:text-[#B88E2F] transition-all">Contact</Link></li>
           </ul>
         </div>
 
-        {/* Help */}
-        <div>
-          <h4 className="text-[#9F9F9F] font-medium mb-8">Help</h4>
-          <ul className="space-y-6 font-semibold">
-            <li><a href="#" className="hover:text-primary">Payment Options</a></li>
-            <li><a href="#" className="hover:text-primary">Returns</a></li>
-            <li><a href="#" className="hover:text-primary">Privacy Policies</a></li>
+        {/* Help Section */}
+        <div className="space-y-8">
+          <h4 className="text-[#9F9F9F] font-medium">Help</h4>
+          <ul className="space-y-8 font-medium">
+            <li><Link to="/payment-options" className="hover:text-[#B88E2F] transition-all">Payment Options</Link></li>
+            <li><Link to="/returns" className="hover:text-[#B88E2F] transition-all">Returns</Link></li>
+            <li><Link to="/privacy-policies" className="hover:text-[#B88E2F] transition-all">Privacy Policies</Link></li>
           </ul>
         </div>
 
-        {/* Newsletter */}
-        <div>
-          <h4 className="text-[#9F9F9F] font-medium mb-8">Newsletter</h4>
-          <div className="flex items-center gap-4">
+        {/* Newsletter Section */}
+        <div className="space-y-8">
+          <h4 className="text-[#9F9F9F] font-medium">Newsletter</h4>
+          <div className="flex gap-4">
             <input 
               type="email" 
               placeholder="Enter Your Email Address" 
-              className="border-b border-black py-1 focus:outline-none w-full"
+              className="border-b border-black outline-none pb-1 text-sm w-full md:w-auto"
             />
-            <button className="border-b border-black py-1 font-bold uppercase hover:text-primary transition-colors">
+            <button className="border-b border-black font-bold text-sm uppercase hover:text-[#B88E2F] hover:border-[#B88E2F] transition-all">
               Subscribe
             </button>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto mt-12 pt-8 border-t border-gray-200 text-left">
-        <p className="font-medium text-[#333333]">2023 furino. All rights reserved</p>
+      {/* Copyright Bar */}
+      <div className="max-w-7xl mx-auto pt-8 border-t border-[#D9D9D9]">
+        <p className="text-black font-medium">2023 furino. All rights reverved</p>
       </div>
     </footer>
   );

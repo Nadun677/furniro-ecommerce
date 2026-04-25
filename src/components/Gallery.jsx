@@ -1,51 +1,33 @@
+import React from 'react';
+
 const Gallery = () => {
   return (
-    <section className="py-16 overflow-hidden">
-      <div className="text-center mb-8">
+    <section className="py-20 overflow-hidden border-t border-gray-100">
+      <div className="text-center mb-10">
         <p className="text-[#616161] font-semibold">Share your setup with</p>
         <h2 className="text-4xl font-bold text-[#3A3A3A]">#FurniroFurniture</h2>
       </div>
 
-      {/* Masonry-style Grid Container */}
-      <div className="grid grid-cols-12 grid-rows-2 gap-4 h-[700px] w-[150%] -translate-x-[25%] lg:w-full lg:translate-x-0">
-        
-        {/* Top Left */}
-        <div className="col-span-2 row-span-1">
-          <img src="/g1.jpg" className="w-full h-full object-cover" alt="gallery" />
+      {/* Masonry-style Grid */}
+      <div className="columns-1 md:columns-2 lg:columns-4 gap-4 px-4 space-y-4">
+        <div className="break-inside-avoid">
+          <img src="https://images.unsplash.com/photo-1583847268964-b28dc2f51ac9?q=80&w=600" alt="Gallery 1" className="w-full rounded-sm" />
         </div>
-        <div className="col-span-3 row-span-1 mt-10">
-          <img src="/g2.jpg" className="w-full h-full object-cover" alt="gallery" />
+        <div className="break-inside-avoid">
+          <img src="https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?q=80&w=600" alt="Gallery 2" className="w-full rounded-sm" />
         </div>
-
-        {/* Center Main */}
-        <div className="col-span-2 row-span-2 flex items-center justify-center">
-          <img src="/g3.jpg" className="w-full h-4/5 object-cover" alt="gallery" />
+        <div className="break-inside-avoid">
+          <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=600" alt="Gallery 3" className="w-full rounded-sm" />
         </div>
-
-        {/* Top Right */}
-        <div className="col-span-3 row-span-1 mt-10">
-          <img src="/g4.jpg" className="w-full h-full object-cover" alt="gallery" />
+        <div className="break-inside-avoid">
+          <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=600" alt="Gallery 4" className="w-full rounded-sm" />
         </div>
-        <div className="col-span-2 row-span-1">
-          <img src="/g5.jpg" className="w-full h-full object-cover" alt="gallery" />
+        <div className="break-inside-avoid">
+          <img src="https://images.unsplash.com/photo-1505691938895-1758d7eaa511?q=80&w=600" alt="Gallery 5" className="w-full rounded-sm" />
         </div>
-
-        {/* Bottom Left */}
-        <div className="col-span-1 row-span-1">
-           <img src="/g6.jpg" className="w-full h-full object-cover" alt="gallery" />
+        <div className="break-inside-avoid">
+          <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=600" alt="Gallery 6" className="w-full rounded-sm" />
         </div>
-        <div className="col-span-4 row-span-1">
-           <img src="/g7.jpg" className="w-full h-full object-cover" alt="gallery" />
-        </div>
-
-        {/* Bottom Right */}
-        <div className="col-span-2 row-span-1">
-           <img src="/g8.jpg" className="w-full h-full object-cover" alt="gallery" />
-        </div>
-        <div className="col-span-3 row-span-1">
-           <img src="/g9.jpg" className="w-full h-full object-cover" alt="gallery" />
-        </div>
-
       </div>
     </section>
   );
