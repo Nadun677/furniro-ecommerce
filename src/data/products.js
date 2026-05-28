@@ -2,46 +2,146 @@ export const productsData = [
   {
     id: 1,
     name: "Syltherine",
-    subTitle: "Stylish cafe chair",
+    category: "Chair",
     price: "2,500,000",
-    oldPrice: "3,500,000",
-    description: "A premium cafe chair that combines industrial style with comfort. Perfect for modern dining areas.",
-    image: "/p1.png",
-    discount: "30",
-    category: "Chairs",
+    image: "/src/assets/chair1.webp",
+    description: "Stylish cafe chair",
     sku: "SS001"
   },
   {
     id: 2,
     name: "Leviosa",
-    subTitle: "Stylish cafe chair",
+    category: "Chair",
     price: "2,500,000",
-    description: "The Leviosa chair is known for its lightweight design and ergonomic support, making it a favorite for long cafe sessions.",
-    image: "/p2.png",
-    category: "Chairs",
+    image: "/src/assets/chair2.jpg",
+    description: "Stylish cafe chair",
     sku: "SS002"
   },
   {
     id: 3,
     name: "Lolito",
-    subTitle: "Luxury big sofa",
+    category: "Sofa",
     price: "7,000,000",
-    oldPrice: "14,000,000",
-    description: "An expansive luxury sofa that serves as the centerpiece of any living room. Soft fabric meets a sturdy oak frame.",
-    image: "/p3.png",
-    discount: "50",
-    category: "Sofas",
+    image: "/src/assets/sofa1.webp",
+    description: "Luxury big sofa",
     sku: "SS003"
   },
   {
     id: 4,
     name: "Respira",
-    subTitle: "Outdoor bar table and stool",
+    category: "Table",
     price: "500,000",
-    description: "Designed for the outdoors, the Respira set is weather-resistant and perfect for balcony or garden setups.",
-    image: "/p4.png",
-    isNew: true,
-    category: "Outdoor",
+    image: "/src/assets/table1.avif",
+    description: "Outdoor bar table and stool",
     sku: "SS004"
+  },
+  {
+    id: 5,
+    name: "Grifo",
+    category: "Lamp",
+    price: "1,500,000",
+    image: "/src/assets/lamp1.webp",
+    description: "Night lamp",
+    sku: "SS005"
+  },
+  {
+    id: 6,
+    name: "Muggo",
+    category: "Chair",
+    price: "150,000",
+    image: "/src/assets/chair3.jpg",
+    description: "Small mug chair",
+    sku: "SS006"
+  },
+  {
+    id: 7,
+    name: "Pingky",
+    category: "Sofa",
+    price: "7,000,000",
+    image: "/src/assets/1_5d1458e3-7a74-473a-a195-db4cbb619727.webp",
+    description: "Cute bed set",
+    sku: "SS007"
+  },
+  {
+    id: 8,
+    name: "Potty",
+    category: "Sofa",
+    price: "500,000",
+    image: "/src/assets/sofa5.webp",
+    description: "Minimalist flower pot",
+    sku: "SS008"
+  },
+  // New Additions for Variety
+  {
+    id: 9,
+    name: "Kili",
+    category: "Table",
+    price: "850,000",
+    image: "/src/assets/table2.webp", 
+    description: "Mid-century coffee table",
+    sku: "SS009"
+  },
+  {
+    id: 10,
+    name: "Artemis",
+    category: "Lamp",
+    price: "1,200,000",
+    image: "/src/assets/lamp2.webp",
+    description: "Modern floor lamp",
+    sku: "SS010"
+  },
+  {
+    id: 11,
+    name: "Hera",
+    category: "Sofa",
+    price: "9,500,000",
+    image: "/src/assets/sofa4.webp",
+    description: "Premium velvet sectional",
+    sku: "SS011"
+  },
+  {
+    id: 12,
+    name: "Apollo",
+    category: "Chair",
+    price: "320,000",
+    image: "/src/assets/chair4.webp",
+    description: "Ergonomic office chair",
+    sku: "SS012"
+  },
+    {
+    id: 13,
+    name: "Apollo",
+    category: "Beds",
+    price: "320,000",
+    image: "/src/assets/bedrrom.webp",
+    description: "Ergonomic office chair",
+    sku: "SS012"
+  },
+  {
+    id: 14,
+    name: "Apollo",
+    category: "Beds",
+    price: "320,000",
+    image: "/src/assets/bed2.webp",
+    description: "Ergonomic office chair",
+    sku: "SS012"
+  },
+  {
+    id: 15,
+    name: "Apollo",
+    category: "Beds",
+    price: "320,000",
+    image: "/src/assets/beds1.webp",
+    description: "Ergonomic office chair",
+    sku: "SS012"
+  },
+  {
+    id: 16,
+    name: "Apollo",
+    category: "Beds",
+    price: "320,000",
+    image: "/src/assets/bed3.webp",
+    description: "Ergonomic office chair",
+    sku: "SS012"
   }
 ];

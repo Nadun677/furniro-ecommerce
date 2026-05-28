@@ -1,60 +1,93 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { useCart } from '../context/CartContext';
+import { Share2, ArrowRightLeft, Heart } from 'lucide-react';
 
-const ProductCard = ({ product, onAddToCart }) => {
+const ProductCard = ({ product }) => {
+  const { addToCart, addToComparison } = useCart();
+
   return (
-    <div className="group relative bg-[#F4F5F7] transition-all">
-      {/* Image & Badges */}
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      className="group relative bg-[#F4F5F7] overflow-hidden flex flex-col h-full"
+    >
+      {/* Image Container */}
       <div className="relative aspect-square overflow-hidden">
-        <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
+        {/* Product Image */}
+        <img 
+          src={product.image} 
+          alt={product.name} 
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+        />
         
-        {/* Discount Badge (Red) */}
+        {/* Discount/New Badges (Optional UI polish) */}
         {product.discount && (
-          <div className="absolute top-5 right-5 w-12 h-12 rounded-full bg-[#E97171] text-white flex items-center justify-center text-sm">
+          <div className="absolute top-5 right-5 w-12 h-12 rounded-full bg-[#E97171] text-white flex items-center justify-center text-sm font-medium">
             -{product.discount}%
           </div>
         )}
 
-        {/* New Badge (Green) - Optional addition */}
-        {product.isNew && (
-          <div className="absolute top-5 right-5 w-12 h-12 rounded-full bg-[#2EC1AC] text-white flex items-center justify-center text-sm">
-            New
+        {/* Hover Overlay */}
+        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-4 px-4">
+          
+          {/* Main Action: Add to Cart */}
+          <button 
+            onClick={() => addToCart(product, 1)}
+            className="bg-white text-[#B88E2F] w-full py-3 font-semibold hover:bg-[#B88E2F] hover:text-white transition-colors"
+          >
+            Add to cart
+          </button>
+
+          {/* Secondary Action: View Detail */}
+          <Link 
+            to={`/product/${product.id}`} 
+            className="bg-transparent border border-white text-white w-full py-3 font-semibold text-center hover:bg-white hover:text-black transition-all"
+          >
+            View Detail
+          </Link>
+          
+          {/* Quick Action Icons */}
+          <div className="flex gap-4 text-white font-semibold text-sm mt-2">
+            <button className="flex items-center gap-1 hover:text-[#B88E2F] transition-colors">
+              <Share2 size={16} /> Share
+            </button>
+            <button 
+              onClick={() => addToComparison(product)} 
+              className="flex items-center gap-1 hover:text-[#B88E2F] transition-colors"
+            >
+              <ArrowRightLeft size={16} /> Compare
+            </button>
+            <button className="flex items-center gap-1 hover:text-[#B88E2F] transition-colors">
+              <Heart size={16} /> Like
+            </button>
           </div>
-        )}
+        </div>
       </div>
 
-      {/* Content */}
-      <div className="p-4">
-        <h3 className="text-2xl font-semibold text-[#3A3A3A] mb-1">{product.name}</h3>
-        <p className="text-[#898989] mb-2">{product.subTitle}</p>
-        <div className="flex flex-col">
-          <span className="text-xl font-semibold">Rp {product.price}</span>
+      {/* Product Information */}
+      <div className="p-4 flex flex-col flex-grow bg-[#F4F5F7]">
+        <h3 className="text-2xl font-semibold text-[#3A3A3A] mb-1">
+          {product.name}
+        </h3>
+        <p className="text-[#898989] font-medium mb-3 flex-grow">
+          {product.description}
+        </p>
+        <div className="flex justify-between items-center mt-auto">
+          <span className="text-xl font-semibold text-[#3A3A3A]">
+            Rs. {product.price}
+          </span>
           {product.oldPrice && (
-            <span className="text-gray-400 line-through text-sm">Rp {product.oldPrice}</span>
+            <span className="text-[#B0B0B0] line-through text-sm">
+              Rs. {product.oldPrice}
+            </span>
           )}
         </div>
       </div>
-
-      {/* Hover Overlay */}
-      <div className="absolute inset-0 bg-[#3A3A3A]/70 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-4">
-        <button 
-          onClick={(e) => {
-            e.preventDefault();
-            onAddToCart(product); // FIX: Passing the product data here
-          }}
-          className="bg-white text-[#B88E2F] px-10 py-3 font-semibold hover:bg-[#B88E2F] hover:text-white transition-all w-3/4"
-        >
-          Add to cart
-        </button>
-        
-        <div className="flex gap-4 text-white text-sm font-semibold">
-           {/* Share icon or Share text could go here */}
-           <Link to={`/product/${product.id}`} className="flex items-center gap-1 hover:text-[#B88E2F] transition-all">
-             View Detail
-           </Link>
-        </div>
-      </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -2,9 +2,9 @@ import React from 'react';
 
 const BrowseRange = () => {
   const categories = [
-    { title: "Dining", img: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?q=80&w=800" },
-    { title: "Living", img: "https://images.unsplash.com/photo-1583847268964-b28dc2f51ac9?q=80&w=800" },
-    { title: "Bedroom", img: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?q=80&w=800" }
+    { title: "Dining", img: "/src/assets/dinning.webp" },
+    { title: "Living", img: "/src/assets/Living-and-dining_1_1_2200x.webp" },
+    { title: "Bedroom", img: "/src/assets/bedrrom.webp" }
   ];
 
   return (

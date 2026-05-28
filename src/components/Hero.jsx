@@ -1,22 +1,25 @@
+import React from 'react';
 import { Link } from "react-router-dom";
+import heroImg from '../assets/banner1.webp'; // Import your image here
 
 const Hero = () => {
   return (
-    <section className="relative h-[80vh] w-full flex items-center justify-end px-10 lg:px-20 bg-[url('/hero-banner.jpg')] bg-cover bg-center">
+    <section 
+      style={{ backgroundImage: `url(${heroImg})` }} // Apply as inline style
+      className="relative h-[80vh] w-full flex items-center justify-center md:justify-end px-4 md:px-20 bg-cover bg-center"
+    >
       
-      <div className="bg-[#FFF3E3] p-8 md:p-12 max-w-[640px] rounded-md shadow-sm">
-        <h6 className="uppercase tracking-[3px] font-semibold text-sm mb-4 text-[#333]">New Arrival</h6>
-        <h1 className="text-4xl md:text-6xl font-bold text-[#B88E2F] mb-6 leading-tight">
+      <div className="bg-[#FFF3E3] p-8 md:p-14 max-w-[640px] rounded-[10px] shadow-sm">
+        <h6 className="uppercase tracking-[3px] font-semibold text-sm mb-4 text-[#333333]">New Arrival</h6>
+        <h1 className="text-4xl md:text-[52px] font-bold text-[#B88E2F] mb-4 leading-[1.2]">
           Discover Our <br /> New Collection
         </h1>
-        <p className="text-[#666] text-lg mb-10">
-          Experience premium furniture designed for modern living. Quality and comfort meet style.
+        <p className="text-[#333333] text-lg mb-12 font-medium">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis.
         </p>
-        
-        {/* Changed button to Link */}
         <Link 
           to="/shop" 
-          className="inline-block bg-[#B88E2F] text-white font-bold px-12 py-6 uppercase hover:bg-[#a17a22] transition-colors"
+          className="inline-block bg-[#B88E2F] text-white font-bold px-14 py-6 uppercase hover:bg-black transition-all"
         >
           Buy Now
         </Link>

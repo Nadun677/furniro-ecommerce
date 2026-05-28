@@ -2,61 +2,117 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const CartContext = createContext();
 
-export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState(() => {
-    const savedCart = localStorage.getItem('furniro_cart');
-    return savedCart ? JSON.parse(savedCart) : [];
-  });
+export const useCart = () => {
+  const context = useContext(CartContext);
+  if (!context) {
+    throw new Error('useCart must be used within a CartProvider');
+  }
+  return context;
+};
 
-  // NEW: Comparison State initialized as an empty array
+export const CartProvider = ({ children }) => {
+  // 1. State for Cart and Comparison
+  const [cartItems, setCartItems] = useState([]);
   const [comparisonItems, setComparisonItems] = useState([]);
+  const [cartTotal, setCartTotal] = useState(0);
+
+  // 2. Persistent Storage (LocalStorage)
+  // This ensures your items stay even if you refresh the page
+  useEffect(() => {
+    const savedCart = localStorage.getItem('furniro_cart');
+    const savedComparison = localStorage.getItem('furniro_comparison');
+    if (savedCart) setCartItems(JSON.parse(savedCart));
+    if (savedComparison) setComparisonItems(JSON.parse(savedComparison));
+  }, []);
 
   useEffect(() => {
     localStorage.setItem('furniro_cart', JSON.stringify(cartItems));
+    calculateTotal();
   }, [cartItems]);
 
-  const addToCart = (product, quantity) => {
-    setCartItems(prevItems => {
-      const existingItem = prevItems.find(item => item.id === product.id);
+  useEffect(() => {
+    localStorage.setItem('furniro_comparison', JSON.stringify(comparisonItems));
+  }, [comparisonItems]);
+
+  // 3. Cart Logic
+  const addToCart = (product, quantity = 1) => {
+    setCartItems((prevItems) => {
+      const existingItem = prevItems.find((item) => item.id === product.id);
       if (existingItem) {
-        return prevItems.map(item =>
-          item.id === product.id ? { ...item, quantity: item.quantity + quantity } : item
+        return prevItems.map((item) =>
+          item.id === product.id 
+            ? { ...item, quantity: item.quantity + quantity } 
+            : item
         );
       }
       return [...prevItems, { ...product, quantity }];
     });
+    // alert(`${product.name} added to cart!`); // Simple feedback
   };
 
-  // NEW: Add to Comparison Function
+  const removeFromCart = (productId) => {
+    setCartItems((prevItems) => prevItems.filter((item) => item.id !== productId));
+  };
+
+  const updateQuantity = (productId, newQuantity) => {
+    if (newQuantity < 1) return;
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === productId ? { ...item, quantity: newQuantity } : item
+      )
+    );
+  };
+
+  const clearCart = () => {
+    setCartItems([]);
+  };
+
+  const calculateTotal = () => {
+    const total = cartItems.reduce((acc, item) => {
+      // Remove commas from price string (e.g., "25,000" -> 25000)
+      const price = typeof item.price === 'string' 
+        ? parseFloat(item.price.replace(/,/g, '')) 
+        : item.price;
+      return acc + (price * item.quantity);
+    }, 0);
+    setCartTotal(total);
+  };
+
+  // 4. Comparison Logic
   const addToComparison = (product) => {
-    setComparisonItems(prev => {
-      if (prev.find(item => item.id === product.id)) return prev;
-      if (prev.length >= 3) return [...prev.slice(1), product]; 
+    setComparisonItems((prev) => {
+      // Limit to 3 products for comparison layout
+      if (prev.find((item) => item.id === product.id)) {
+        alert("Item already in comparison");
+        return prev;
+      }
+      if (prev.length >= 3) {
+        alert("You can only compare up to 3 products");
+        return prev;
+      }
       return [...prev, product];
     });
   };
 
-  const removeFromCart = (id) => {
-    setCartItems(prev => prev.filter(item => item.id !== id));
+  const removeFromComparison = (productId) => {
+    setComparisonItems((prev) => prev.filter((item) => item.id !== productId));
   };
 
-  const cartTotal = cartItems.reduce((total, item) => {
-    const price = parseFloat(item.price.toString().replace(/,/g, ''));
-    return total + price * item.quantity;
-  }, 0);
-
   return (
-    <CartContext.Provider value={{ 
-      cartItems, 
-      addToCart, 
-      removeFromCart, 
-      cartTotal,
-      comparisonItems, // Shared data
-      addToComparison  // Shared function
-    }}>
+    <CartContext.Provider
+      value={{
+        cartItems,
+        comparisonItems,
+        cartTotal,
+        addToCart,
+        removeFromCart,
+        updateQuantity,
+        clearCart,
+        addToComparison,
+        removeFromComparison,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );
 };
-
-export const useCart = () => useContext(CartContext);

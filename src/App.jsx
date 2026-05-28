@@ -14,6 +14,7 @@ import Contact from './pages/Contact';
 import Checkout from './pages/Checkout';
 import ProductDetail from './pages/ProductDetail';
 import Cart from './pages/Cart';
+import Success from './pages/Success';
 
 function App() {
   // Logic to open/close the Cart Sidebar
@@ -32,6 +33,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/comparison" element={<Comparison />} />
+          
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
@@ -41,6 +43,7 @@ function App() {
           
           {/* Optional: Add a fallback for just /product */}
           <Route path="/product" element={<ProductDetail />} />
+          <Route path="/success" element={<Success />} />
         </Routes>
       </main>
 
