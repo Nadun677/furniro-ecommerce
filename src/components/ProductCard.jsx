@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useCart } from '../context/CartContext';
 import { Share2, ArrowRightLeft, Heart } from 'lucide-react';
 
+// 1. Import a fallback placeholder image from your assets folder
+import defaultProductImg from "../assets/chair1.webp"; 
+
 const ProductCard = ({ product }) => {
   const { addToCart, addToComparison } = useCart();
+  
+  // 2. Local state to manage broken dynamic image paths seamlessly
+  const [imgSrc, setImgSrc] = useState(product.image || defaultProductImg);
 
   return (
     <motion.div 
@@ -17,23 +23,23 @@ const ProductCard = ({ product }) => {
     >
       {/* Image Container */}
       <div className="relative aspect-square overflow-hidden bg-[#E0E0E0]">
-        {/* Product Image - Reads dynamically from your fixed products.js imports */}
+        
+        {/* Product Image with Fallback security */}
         <img 
-          src={product.image} 
+          src={imgSrc} 
           alt={product.name} 
+          onError={() => setImgSrc(defaultProductImg)} // 3. Automatically uses imported fallback if main image path fails
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
         />
         
         {/* Badges Container (Top Right) */}
         <div className="absolute top-5 right-5 flex flex-col gap-2 z-10">
-          {/* Discount Badge (Red) */}
           {product.discount && (
             <div className="w-12 h-12 rounded-full bg-[#E97171] text-white flex items-center justify-center text-sm font-medium">
               -{product.discount}%
             </div>
           )}
 
-          {/* New Badge (Green/Teal) - Matches your data entry for item 'Respira' */}
           {product.isNew && (
             <div className="w-12 h-12 rounded-full bg-[#2EC1AC] text-white flex items-center justify-center text-sm font-medium">
               New
@@ -44,7 +50,6 @@ const ProductCard = ({ product }) => {
         {/* Hover Overlay */}
         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-4 px-6 z-20">
           
-          {/* Main Action: Add to Cart */}
           <button 
             onClick={() => addToCart(product, 1)}
             className="bg-white text-[#B88E2F] w-full py-3 font-semibold hover:bg-[#B88E2F] hover:text-white transition-colors duration-300"
@@ -52,7 +57,6 @@ const ProductCard = ({ product }) => {
             Add to cart
           </button>
 
-          {/* Secondary Action: View Detail */}
           <Link 
             to={`/product/${product.id}`} 
             className="bg-transparent border border-white text-white w-full py-3 font-semibold text-center hover:bg-white hover:text-black transition-all duration-300"

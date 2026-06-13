@@ -11,7 +11,7 @@ const Home = () => {
       <Hero />
       <BrowseRange />
       <div className="max-w-7xl mx-auto py-16 px-4">
-        <h2 className="text-3xl font-bold text-center mb-10">Our Products</h2>
+
         <ProductGrid limit={8} /> 
       </div>
       <Inspiration />
