@@ -38,10 +38,10 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           
-          {/* FIX: Added /:id so that /product/1 actually shows the page */}
+        
           <Route path="/product/:id" element={<ProductDetail />} />
           
-          {/* Optional: Add a fallback for just /product */}
+
           <Route path="/product" element={<ProductDetail />} />
           <Route path="/success" element={<Success />} />
         </Routes>

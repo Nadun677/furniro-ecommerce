@@ -12,7 +12,7 @@ import s4Img from "../assets/sofa4.webp";
 import c4Img from "../assets/chair4.webp";
 import bImg from "../assets/bedrrom.webp";
 import b2Img from "../assets/bed2.webp";
-import b1Img from "../assets/beds1.webp"; // Fixed variable reference name
+import b1Img from "../assets/beds1.webp"; 
 import b3Img from "../assets/bed3.webp";
 
 export const productsData = [

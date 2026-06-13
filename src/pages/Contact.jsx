@@ -8,7 +8,7 @@ const Contact = () => {
       <div className="relative h-72 bg-[url('/cart-banner.png')] bg-cover bg-center flex flex-col items-center justify-center">
         <div className="absolute inset-0 bg-white/30 backdrop-blur-[2px]"></div>
         <div className="relative z-10 text-center">
-          <img src="/logo.png" alt="logo" className="mx-auto mb-2 w-12" />
+         
           <h1 className="text-5xl font-medium">Contact</h1>
           <p className="mt-4"><span className="font-bold">Home</span> {'>'} Contact</p>
         </div>
