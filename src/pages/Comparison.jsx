@@ -1,165 +1,193 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Star, X } from 'lucide-react'; // Added X icon
+import { Star, X, Trophy, ShieldCheck, Truck, Headset } from 'lucide-react'; 
 import { useCart } from '../context/CartContext';
 
+// 1. Correctly import structural background images and logos to maintain Vite stability
+import bannerImg from '../assets/banner1.webp'; 
+import logoImg from '../assets/Mask Group.png'; 
+
 const Comparison = () => {
-  // Destructure removeFromComparison from your context
   const { comparisonItems, addToCart, removeFromComparison } = useCart();
+
+  // Standard feature items mapped to robust vectors instead of broken static pngs
+  const features = [
+    { icon: <Trophy size={40} className="text-[#242424]" strokeWidth={1.5} />, title: "High Quality", desc: "crafted from top materials" },
+    { icon: <ShieldCheck size={40} className="text-[#242424]" strokeWidth={1.5} />, title: "Warranty Protection", desc: "Over 2 years" },
+    { icon: <Truck size={40} className="text-[#242424]" strokeWidth={1.5} />, title: "Free Shipping", desc: "Order over 150 $" },
+    { icon: <Headset size={40} className="text-[#242424]" strokeWidth={1.5} />, title: "24 / 7 Support", desc: "Dedicated support" }
+  ];
+
+  // We enforce a fixed maximum grid of 3 comparison slots to match the Furniro spec
+  const maxComparisonSlots = 3;
+  const displayItems = comparisonItems ? comparisonItems.slice(0, maxComparisonSlots) : [];
+  const emptySlotsCount = Math.max(0, maxComparisonSlots - displayItems.length);
 
   return (
     <div className="w-full font-poppins pb-20">
-      {/* 1. Header Banner */}
-      <div className="relative h-72 bg-[url('/cart-banner.png')] bg-cover bg-center flex flex-col items-center justify-center">
-        <div className="absolute inset-0 bg-white/30 backdrop-blur-[2px]"></div>
+      
+      {/* 1. Header Banner using dynamic styling background image */}
+      <div 
+        style={{ backgroundImage: `url(${bannerImg})` }}
+        className="relative h-72 bg-cover bg-center flex flex-col items-center justify-center"
+      >
+        <div className="absolute inset-0 bg-white/50 backdrop-blur-[4px]"></div>
         <div className="relative z-10 text-center">
-          <img src="/logo.png" alt="logo" className="mx-auto mb-2 w-12" />
-          <h1 className="text-5xl font-medium">Product Comparison</h1>
-          <p className="mt-4"><span className="font-bold">Home</span> {'>'} Comparison</p>
+          <img src={logoImg} alt="logo" className="mx-auto mb-2 w-10 h-auto object-contain" />
+          <h1 className="text-4xl md:text-5xl font-medium text-black">Product Comparison</h1>
+          <p className="mt-2 text-sm text-black font-medium">
+            <Link to="/" className="hover:underline">Home</Link> &gt; Comparison
+          </p>
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 md:px-10 mt-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        
+        {/* Product Selection Row Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 items-start">
           
-          {/* Column 1: Intro Text */}
-          <div className="space-y-4">
-            <h2 className="text-2xl font-medium leading-tight">Go to Product page for more Products</h2>
-            <Link to="/shop" className="text-[#727272] underline underline-offset-8 font-medium block hover:text-black">
+          {/* Column 1: Intro Routing Action Links */}
+          <div className="space-y-2 pt-4">
+            <h2 className="text-2xl font-medium leading-snug text-black">
+              Go to Product page for more Products
+            </h2>
+            <Link to="/shop" className="text-[#727272] underline underline-offset-8 font-medium block hover:text-[#B88E2F] transition-colors">
               View More
             </Link>
           </div>
 
-          {/* Dynamic Comparison Columns */}
-          {comparisonItems && comparisonItems.length > 0 ? (
-            comparisonItems.slice(0, 3).map((product) => (
-              <div key={product.id} className="space-y-4 relative group">
-                
-                {/* REMOVE BUTTON (The X) */}
-                <button 
-                  onClick={() => removeFromComparison(product.id)}
-                  className="absolute -top-2 -right-2 bg-[#B88E2F] text-white rounded-full p-1 shadow-md hover:bg-black transition-all z-20"
-                >
-                  <X size={18} />
-                </button>
+          {/* Dynamic Map Rendering across exactly 3 available product comparison card cells */}
+          {displayItems.map((product) => (
+            <div key={product.id} className="space-y-4 relative bg-white p-2 rounded-lg border border-transparent hover:border-gray-100 transition-all">
+              
+              {/* REMOVE BUTTON */}
+              <button 
+                onClick={() => removeFromComparison(product.id)}
+                className="absolute top-0 right-0 bg-[#B88E2F] text-white rounded-full p-1 shadow-md hover:bg-black transition-all z-20"
+                title="Remove from comparison"
+              >
+                <X size={16} />
+              </button>
 
-                <div className="bg-[#F9F1E7] rounded-lg p-4 h-48 flex items-center justify-center relative overflow-hidden">
-                  <img src={product.image} alt={product.name} className="max-h-full object-contain" />
-                </div>
-                
-                <h3 className="text-2xl font-medium">{product.name}</h3>
-                <p className="font-medium text-lg">Rs. {product.price}</p>
-                <div className="flex items-center gap-2">
-                  <span className="font-medium">4.7</span>
-                  <div className="flex text-yellow-500">
-                    <Star size={16} fill="currentColor" />
-                    <Star size={16} fill="currentColor" />
-                    <Star size={16} fill="currentColor" />
-                    <Star size={16} fill="currentColor" />
-                    <Star size={16} />
-                  </div>
-                  <span className="text-[#9F9F9F] text-xs border-l pl-2">204 Reviews</span>
-                </div>
+              <div className="bg-[#F9F1E7] rounded-[10px] p-4 h-44 flex items-center justify-center overflow-hidden">
+                <img src={product.image} alt={product.name} className="max-h-full max-w-full object-contain mix-blend-multiply" />
               </div>
-            ))
-          ) : (
-            <div className="md:col-span-2 py-10 bg-[#F9F1E7] rounded-xl text-center">
-              <p className="text-[#9F9F9F]">No products added to comparison yet.</p>
-              <Link to="/shop" className="text-[#B88E2F] font-bold">Browse Shop</Link>
+              
+              <h3 className="text-xl font-semibold text-black">{product.name}</h3>
+              <p className="font-medium text-base text-[#3A3A3A]">Rs. {product.price}</p>
+              
+              <div className="flex items-center gap-2">
+                <span className="font-semibold text-sm">4.7</span>
+                <div className="flex text-[#F4B400]">
+                  {[...Array(4)].map((_, i) => <Star key={i} size={14} fill="currentColor" stroke="none" />)}
+                  <Star size={14} className="text-gray-300" />
+                </div>
+                <span className="text-[#9F9F9F] text-xs border-l border-[#9F9F9F] pl-2">204 Reviews</span>
+              </div>
+            </div>
+          ))}
+
+          {/* Render Empty Placeholders to preserve alignment spacing rules if slots are open */}
+          {[...Array(emptySlotsCount)].map((_, index) => (
+            <div key={`empty-${index}`} className="hidden md:flex flex-col justify-center items-center border-2 border-dashed border-gray-200 rounded-[10px] h-64 p-4 text-center bg-gray-50/50">
+              <p className="text-sm text-gray-400 font-medium mb-3">Slot Available</p>
+              <Link to="/shop" className="bg-[#B88E2F] text-white py-2 px-4 rounded text-xs font-semibold hover:bg-black transition-colors">
+                Add Product
+              </Link>
+            </div>
+          ))}
+
+          {/* Column 4: Explicit static Call To Action sidebar link button block */}
+          {displayItems.length === maxComparisonSlots && (
+            <div className="space-y-3 pt-4">
+              <h3 className="text-xl font-medium text-black">Add A Product</h3>
+              <Link to="/shop" className="block">
+                <button className="w-full bg-[#B88E2F] text-white py-2.5 px-4 rounded text-sm font-semibold hover:bg-black transition-colors shadow-sm">
+                  Choose a Product
+                </button>
+              </Link>
             </div>
           )}
-
-          {/* Add Product Placeholder */}
-          <div className="space-y-4">
-            <h3 className="text-2xl font-medium">Add A Product</h3>
-            <Link to="/shop">
-              <button className="w-full bg-[#B88E2F] text-white py-2 px-4 rounded-md text-sm font-semibold hover:bg-black transition-colors">
-                Choose a Product
-              </button>
-            </Link>
-          </div>
         </div>
 
-        {/* Comparison Table Section */}
-        <div className="mt-20 border-t pt-10 overflow-x-auto">
-          <table className="w-full text-left border-collapse min-w-[800px]">
+        {/* 2. Structured Robust Data Comparison Matrix Table */}
+        <div className="mt-20 border-t border-gray-200 pt-10 overflow-x-auto">
+          <table className="w-full text-left border-collapse min-w-[800px] table-fixed">
             <thead>
-              <tr>
-                <th className="py-8 text-2xl font-medium w-1/4">General</th>
-                {comparisonItems.map(item => <th key={item.id} className="w-1/4"></th>)}
-                {/* Fill empty columns to maintain grid */}
-                {[...Array(Math.max(0, 3 - comparisonItems.length))].map((_, i) => <th key={i} className="w-1/4"></th>)}
+              <tr className="border-b border-gray-100">
+                <th className="py-4 text-2xl font-semibold text-black w-1/4 pb-6">General</th>
+                {displayItems.map(item => <th key={item.id} className="w-1/4 py-4 font-semibold text-lg text-black">{item.name}</th>)}
+                {[...Array(emptySlotsCount)].map((_, i) => <th key={`header-empty-${i}`} className="w-1/4 py-4"></th>)}
               </tr>
             </thead>
-            <tbody className="text-sm">
-              <tr className="border-b">
-                <td className="py-4 font-medium">Sales Package</td>
-                {comparisonItems.map(item => <td key={item.id} className="py-4">1 sectional sofa</td>)}
-                {[...Array(Math.max(0, 3 - comparisonItems.length))].map((_, i) => <td key={i}></td>)}
+            <tbody className="text-base text-[#3A3A3A]">
+              <tr className="border-b border-gray-100 hover:bg-gray-50/50 transition-colors">
+                <td className="py-4 font-medium text-black">Sales Package</td>
+                {displayItems.map(item => <td key={item.id} className="py-4 text-gray-600">1 {item.category || 'Item'}</td>)}
+                {[...Array(emptySlotsCount)].map((_, i) => <td key={`pkg-empty-${i}`} className="py-4"></td>)}
               </tr>
-              <tr className="border-b">
-                <td className="py-4 font-medium">Model Number</td>
-                {comparisonItems.map(item => <td key={item.id} className="py-4">{item.sku || 'TFCBLIGRBL6'}</td>)}
-                {[...Array(Math.max(0, 3 - comparisonItems.length))].map((_, i) => <td key={i}></td>)}
+              <tr className="border-b border-gray-100 hover:bg-gray-50/50 transition-colors">
+                <td className="py-4 font-medium text-black">Model Number</td>
+                {displayItems.map(item => <td key={item.id} className="py-4 font-mono text-sm text-gray-600">{item.sku || 'N/A'}</td>)}
+                {[...Array(emptySlotsCount)].map((_, i) => <td key={`sku-empty-${i}`} className="py-4"></td>)}
               </tr>
-              <tr className="border-b">
-                <td className="py-4 font-medium">Secondary Material</td>
-                {comparisonItems.map(item => <td key={item.id} className="py-4">Solid Wood</td>)}
-                {[...Array(Math.max(0, 3 - comparisonItems.length))].map((_, i) => <td key={i}></td>)}
+              <tr className="border-b border-gray-100 hover:bg-gray-50/50 transition-colors">
+                <td className="py-4 font-medium text-black">Secondary Material</td>
+                {displayItems.map(item => <td key={item.id} className="py-4 text-gray-600">Solid Wood / Metal</td>)}
+                {[...Array(emptySlotsCount)].map((_, i) => <td key={`mat-empty-${i}`} className="py-4"></td>)}
               </tr>
             </tbody>
             
             <thead>
-              <tr>
-                <th className="py-8 text-2xl font-medium">Product</th>
-                {comparisonItems.map(item => <th key={item.id}></th>)}
-                {[...Array(Math.max(0, 3 - comparisonItems.length))].map((_, i) => <th key={i}></th>)}
+              <tr className="border-b border-gray-100">
+                <th className="py-8 text-2xl font-semibold text-black w-1/4">Product Specifications</th>
+                {displayItems.map(item => <th key={item.id} className="w-1/4 py-8"></th>)}
+                {[...Array(emptySlotsCount)].map((_, i) => <th key={`spec-empty-h-${i}`} className="w-1/4 py-8"></th>)}
               </tr>
             </thead>
-            <tbody className="text-sm">
-              <tr className="border-b">
-                <td className="py-4 font-medium">Filling Material</td>
-                {comparisonItems.map(item => <td key={item.id} className="py-4">Foam</td>)}
-                {[...Array(Math.max(0, 3 - comparisonItems.length))].map((_, i) => <td key={i}></td>)}
+            <tbody className="text-base text-[#3A3A3A]">
+              <tr className="border-b border-gray-100 hover:bg-gray-50/50 transition-colors">
+                <td className="py-4 font-medium text-black">Filling Material</td>
+                {displayItems.map(item => <td key={item.id} className="py-4 text-gray-600">High Density Foam</td>)}
+                {[...Array(emptySlotsCount)].map((_, i) => <td key={`fill-empty-${i}`} className="py-4"></td>)}
               </tr>
-              <tr className="border-b">
-                <td className="py-4"></td>
-                {comparisonItems.map(item => (
-                  <td key={item.id} className="py-8">
+              <tr className="border-b border-gray-100 hover:bg-gray-50/50 transition-colors">
+                <td className="py-4 font-medium text-black">Description</td>
+                {displayItems.map(item => <td key={item.id} className="py-4 text-sm text-gray-500 italic max-w-xs truncate">{item.description}</td>)}
+                {[...Array(emptySlotsCount)].map((_, i) => <td key={`desc-empty-${i}`} className="py-4"></td>)}
+              </tr>
+              <tr>
+                <td className="py-6"></td>
+                {displayItems.map(item => (
+                  <td key={item.id} className="py-6">
                     <button 
                       onClick={() => addToCart(item, 1)}
-                      className="bg-[#B88E2F] text-white px-8 py-3 rounded hover:bg-black transition-all"
+                      className="bg-[#B88E2F] text-white text-xs md:text-sm font-semibold px-6 py-2.5 rounded hover:bg-black transition-all shadow-sm"
                     >
                       Add To Cart
                     </button>
                   </td>
                 ))}
-                {[...Array(Math.max(0, 3 - comparisonItems.length))].map((_, i) => <td key={i}></td>)}
+                {[...Array(emptySlotsCount)].map((_, i) => <td key={`btn-empty-${i}`} className="py-6"></td>)}
               </tr>
             </tbody>
           </table>
         </div>
       </div>
 
-      {/* Features Bar */}
-      <div className="bg-[#FAF3EA] py-24 px-10 grid grid-cols-1 md:grid-cols-4 gap-8 mt-20">
-        <div className="flex items-center gap-4">
-          <img src="/f1.png" alt="High Quality" className="w-12" />
-          <div><h4 className="text-2xl font-semibold">High Quality</h4><p className="text-[#898989]">crafted from top materials</p></div>
-        </div>
-        <div className="flex items-center gap-4">
-          <img src="/f2.png" alt="Warranty" className="w-12" />
-          <div><h4 className="text-2xl font-semibold">Warranty Protection</h4><p className="text-[#898989]">Over 2 years</p></div>
-        </div>
-        <div className="flex items-center gap-4">
-          <img src="/f3.png" alt="Free Shipping" className="w-12" />
-          <div><h4 className="text-2xl font-semibold">Free Shipping</h4><p className="text-[#898989]">Order over 150 $</p></div>
-        </div>
-        <div className="flex items-center gap-4">
-          <img src="/f4.png" alt="Support" className="w-12" />
-          <div><h4 className="text-2xl font-semibold">24 / 7 Support</h4><p className="text-[#898989]">Dedicated support</p></div>
-        </div>
+      {/* 3. Modernized Vector Icon-Based Features Bar layout */}
+      <div className="bg-[#FAF3EA] py-16 px-6 md:px-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mt-20">
+        {features.map((feat, idx) => (
+          <div key={idx} className="flex items-center gap-4 max-w-[280px] mx-auto md:mx-0">
+            <div className="flex-shrink-0">{feat.icon}</div>
+            <div>
+              <h4 className="text-xl font-semibold text-[#242424] mb-0.5">{feat.title}</h4>
+              <p className="text-[#898989] text-sm font-medium">{feat.desc}</p>
+            </div>
+          </div>
+        ))}
       </div>
+
     </div>
   );
 };
