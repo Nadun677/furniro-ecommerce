@@ -10,9 +10,7 @@ const Gallery = () => {
 
       {/* Masonry-style Grid */}
       <div className="columns-1 md:columns-2 lg:columns-4 gap-4 px-4 space-y-4">
-        <div className="break-inside-avoid">
-          <img src="https://images.unsplash.com/photo-1583847268964-b28dc2f51ac9?q=80&w=600" alt="Gallery 1" className="w-full rounded-sm" />
-        </div>
+        
         <div className="break-inside-avoid">
           <img src="https://images.unsplash.com/photo-1594026112284-02bb6f3352fe?q=80&w=600" alt="Gallery 2" className="w-full rounded-sm" />
         </div>
@@ -22,9 +20,7 @@ const Gallery = () => {
         <div className="break-inside-avoid">
           <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=600" alt="Gallery 4" className="w-full rounded-sm" />
         </div>
-        <div className="break-inside-avoid">
-          <img src="https://images.unsplash.com/photo-1505691938895-1758d7eaa511?q=80&w=600" alt="Gallery 5" className="w-full rounded-sm" />
-        </div>
+       
         <div className="break-inside-avoid">
           <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=600" alt="Gallery 6" className="w-full rounded-sm" />
         </div>

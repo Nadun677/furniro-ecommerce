@@ -13,31 +13,41 @@ const ProductCard = ({ product }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
-      className="group relative bg-[#F4F5F7] overflow-hidden flex flex-col h-full"
+      className="group relative bg-[#F4F5F7] overflow-hidden flex flex-col h-full font-poppins"
     >
       {/* Image Container */}
-      <div className="relative aspect-square overflow-hidden">
-        {/* Product Image */}
+      <div className="relative aspect-square overflow-hidden bg-[#E0E0E0]">
+        {/* Product Image - Reads dynamically from your fixed products.js imports */}
         <img 
           src={product.image} 
           alt={product.name} 
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
         />
         
-        {/* Discount/New Badges (Optional UI polish) */}
-        {product.discount && (
-          <div className="absolute top-5 right-5 w-12 h-12 rounded-full bg-[#E97171] text-white flex items-center justify-center text-sm font-medium">
-            -{product.discount}%
-          </div>
-        )}
+        {/* Badges Container (Top Right) */}
+        <div className="absolute top-5 right-5 flex flex-col gap-2 z-10">
+          {/* Discount Badge (Red) */}
+          {product.discount && (
+            <div className="w-12 h-12 rounded-full bg-[#E97171] text-white flex items-center justify-center text-sm font-medium">
+              -{product.discount}%
+            </div>
+          )}
+
+          {/* New Badge (Green/Teal) - Matches your data entry for item 'Respira' */}
+          {product.isNew && (
+            <div className="w-12 h-12 rounded-full bg-[#2EC1AC] text-white flex items-center justify-center text-sm font-medium">
+              New
+            </div>
+          )}
+        </div>
 
         {/* Hover Overlay */}
-        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-4 px-4">
+        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-4 px-6 z-20">
           
           {/* Main Action: Add to Cart */}
           <button 
             onClick={() => addToCart(product, 1)}
-            className="bg-white text-[#B88E2F] w-full py-3 font-semibold hover:bg-[#B88E2F] hover:text-white transition-colors"
+            className="bg-white text-[#B88E2F] w-full py-3 font-semibold hover:bg-[#B88E2F] hover:text-white transition-colors duration-300"
           >
             Add to cart
           </button>
@@ -45,7 +55,7 @@ const ProductCard = ({ product }) => {
           {/* Secondary Action: View Detail */}
           <Link 
             to={`/product/${product.id}`} 
-            className="bg-transparent border border-white text-white w-full py-3 font-semibold text-center hover:bg-white hover:text-black transition-all"
+            className="bg-transparent border border-white text-white w-full py-3 font-semibold text-center hover:bg-white hover:text-black transition-all duration-300"
           >
             View Detail
           </Link>
@@ -73,10 +83,10 @@ const ProductCard = ({ product }) => {
         <h3 className="text-2xl font-semibold text-[#3A3A3A] mb-1">
           {product.name}
         </h3>
-        <p className="text-[#898989] font-medium mb-3 flex-grow">
+        <p className="text-[#898989] font-medium mb-3 flex-grow text-sm">
           {product.description}
         </p>
-        <div className="flex justify-between items-center mt-auto">
+        <div className="flex justify-between items-center mt-auto flex-wrap gap-2">
           <span className="text-xl font-semibold text-[#3A3A3A]">
             Rs. {product.price}
           </span>
