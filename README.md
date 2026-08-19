@@ -134,18 +134,10 @@ Contributions are welcome! If you'd like to improve Furniro, please follow these
 
 ---
 
-## License
+## Live Demo
 
-This project is licensed under the MIT License - see the [LICENSE](https://www.google.com/search?q=LICENSE) file for details.
+Check out the live deployment on GitHub Pages:
 
-```
-
-<ElicitationsGroup message="Here are a few additional sections you can add to tailor this further:">
-
-{/* Reason: Offers clear next steps to customize the README for specific needs like adding live links, environment variables, or testing documentation. */}
-
-  <Elicitation label="Add environment variables and API integration section" query="Add an Environment Variables setup section and mock REST API configuration guide to the professional Furniro README."/>
-  <Elicitation label="Add deployment guides for Vercel, Netlify, or GitHub Pages" query="Add step-by-step deployment instructions for Vercel and Netlify to the Furniro README."/>
-</ElicitationsGroup>
+https://furniro-ecommerce-eta.vercel.app/
 
 ```
