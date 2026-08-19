@@ -74,47 +74,78 @@ furniro-ecommerce/
 ├── tailwind.config.js
 └── vite.config.js
 
+```
 
 ---
 
+## Getting Started
 
-Getting Started
-Prerequisites
+### Prerequisites
+
 Ensure you have the following installed on your machine:
 
-Node.js: v18.0.0 or higher
+* **Node.js**: `v18.0.0` or higher
+* **npm**: `v9.0.0` or higher (or `pnpm` / `yarn`)
 
-npm: v9.0.0 or higher (or pnpm / yarn)
+### Local Setup Instructions
 
-Local Setup Instructions
-Clone the repository
-
-Bash
+1. **Clone the repository**
+```bash
 git clone [https://github.com/your-username/furniro-ecommerce.git](https://github.com/your-username/furniro-ecommerce.git)
 cd furniro-ecommerce
-Install project dependencies
 
-Bash
+```
+
+
+2. **Install project dependencies**
+```bash
 npm install
-Start the local development server
 
-Bash
+```
+
+
+3. **Start the local development server**
+```bash
 npm run dev
-Open http://localhost:5173 in your browser to view the application.
 
-Build for production
+```
 
-Bash
+
+Open `http://localhost:5173` in your browser to view the application.
+4. **Build for production**
+```bash
 npm run build
-Contributing
+
+```
+
+
+
+---
+
+## Contributing
+
 Contributions are welcome! If you'd like to improve Furniro, please follow these steps:
 
-Fork the repository
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-Create your feature branch (git checkout -b feature/AmazingFeature)
+---
 
-Commit your changes (git commit -m 'Add some AmazingFeature')
+## License
 
-Push to the branch (git push origin feature/AmazingFeature)
+This project is licensed under the MIT License - see the [LICENSE](https://www.google.com/search?q=LICENSE) file for details.
 
-Open a Pull Request
+```
+
+<ElicitationsGroup message="Here are a few additional sections you can add to tailor this further:">
+
+{/* Reason: Offers clear next steps to customize the README for specific needs like adding live links, environment variables, or testing documentation. */}
+
+  <Elicitation label="Add environment variables and API integration section" query="Add an Environment Variables setup section and mock REST API configuration guide to the professional Furniro README."/>
+  <Elicitation label="Add deployment guides for Vercel, Netlify, or GitHub Pages" query="Add step-by-step deployment instructions for Vercel and Netlify to the Furniro README."/>
+</ElicitationsGroup>
+
+```
