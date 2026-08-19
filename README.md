@@ -75,6 +75,9 @@ furniro-ecommerce/
 └── vite.config.js
 
 
+---
+
+
 Getting Started
 Prerequisites
 Ensure you have the following installed on your machine:
