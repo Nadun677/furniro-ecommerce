@@ -5,6 +5,10 @@ Here is a polished, highly professional `README.md` formatted to industry standa
 
 <div align="center">
 
+  ![React](https://img.shiel# Furniro E-Commerce Platform
+
+<div align="center">
+
   ![React](https://img.shields.io/badge/React-18.x-61DAFB?style=for-the-badge&logo=react&logoColor=black)
   ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.x-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
   ![Vite](https://img.shields.io/badge/Vite-5.x-646CFF?style=for-the-badge&logo=vite&logoColor=white)
@@ -76,10 +80,6 @@ furniro-ecommerce/
 ├── package.json
 ├── tailwind.config.js
 └── vite.config.js
-
-```
-
----
 
 ## Getting Started
 
