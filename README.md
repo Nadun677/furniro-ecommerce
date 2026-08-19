@@ -1,11 +1,4 @@
-Here is a polished, highly professional `README.md` formatted to industry standards. It includes shields/badges, an architecture overview, key features, installation guides, and contribution guidelines.
-
-```markdown
 # Furniro E-Commerce Platform
-
-<div align="center">
-
-  ![React](https://img.shiel# Furniro E-Commerce Platform
 
 <div align="center">
 
@@ -80,24 +73,6 @@ furniro-ecommerce/
 ├── package.json
 ├── tailwind.config.js
 └── vite.config.js
-
-## Getting Started
-
-### Prerequisites
-
-Ensure you have the following installed on your machine:
-
-* **Node.js**: `v18.0.0` or higher
-* **npm**: `v9.0.0` or higher (or `pnpm` / `yarn`)
-
-### Local Setup Instructions
-
-1. **Clone the repository**
-```bash
-git clone [https://github.com/your-username/furniro-ecommerce.git](https://github.com/your-username/furniro-ecommerce.git)
-cd furniro-ecommerce
-
-```
 
 
 2. **Install project dependencies**
